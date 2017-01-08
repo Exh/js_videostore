@@ -2,7 +2,7 @@
 
 function statement(customer, movies) {
 
-	let totalFrequentRenterPoints = getFrequentRenterPoints(customer);
+	let totalFrequentRenterPoints = getTotalFrequentRenterPoints(customer);
 
 	let result = `Rental Record for ${customer.name}\n`;
 
@@ -45,7 +45,7 @@ function statement(customer, movies) {
 		return thisAmount;
 	}
 
-	function getFrequentRenterPoints(customer) {
+	function getTotalFrequentRenterPoints(customer) {
 		let totalFrequentRenterPoints = 0;
 		for (let rental of customer.rentals) {
 			//add frequent renter points
