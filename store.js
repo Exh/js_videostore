@@ -102,4 +102,5 @@ let movies = {
 	// etc
 }
 
-console.log(statement(customer, movies))
+console.log(statement(customer, movies,"html"))
+console.log(statement(customer, movies,"text"))
