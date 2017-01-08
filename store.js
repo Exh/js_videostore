@@ -47,16 +47,11 @@ function statement(customer, movies) {
 		return thisAmount;
 	}
 
-	function calcFrequentRenterPoints(rental) {
-		// add bonus for a two day new release rental
-		return getMovieBy(rental).code === "new" && rental.days > 2 ? 2 : 1;
-	}
-
 	function getFrequentRenterPoints(customer) {
 		let totalFrequentRenterPoints = 0;
 		for (let rental of customer.rentals) {
 			//add frequent renter points
-			totalFrequentRenterPoints += calcFrequentRenterPoints(rental);
+			totalFrequentRenterPoints += getMovieBy(rental).code === "new" && rental.days > 2 ? 2 : 1;
 		}
 		return totalFrequentRenterPoints;
 	}
