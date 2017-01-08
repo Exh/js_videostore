@@ -1,19 +1,17 @@
 "use strict"
 
 function statement(customer, movies) {
-	let totalAmount = 0;
 
 	let totalFrequentRenterPoints = getFrequentRenterPoints(customer);
 
 	let result = `Rental Record for ${customer.name}\n`;
+
 	for (let rental of customer.rentals) {
-		let movie = getMovieBy(rental);
 		//print figures for this rental
-		result += `\t${movie.title}\t${getAmount(rental)}\n`;
-		totalAmount += getAmount(rental);
+		result += `\t${getMovieBy(rental).title}\t${getAmount(rental)}\n`;
 	}
 	// add footer lines
-	result += `Amount owed is ${totalAmount}\n`;
+	result += `Amount owed is ${getTotalAmount(customer)}\n`;
 	result += `You earned ${totalFrequentRenterPoints} frequent renter points\n`;
 
 	return result;
@@ -54,6 +52,14 @@ function statement(customer, movies) {
 			totalFrequentRenterPoints += getMovieBy(rental).code === "new" && rental.days > 2 ? 2 : 1;
 		}
 		return totalFrequentRenterPoints;
+	}
+
+	function getTotalAmount(customer) {
+		let totalAmount = 0;
+		for (let rental of customer.rentals) {
+			totalAmount += getAmount(rental);
+		}
+		return totalAmount;
 	}
 }
 
