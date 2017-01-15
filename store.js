@@ -2,13 +2,8 @@
 
 var Customer = require('./Customer')
 
-
-function movieFor(rental) {
-	return rental.movie;
-}
-
 function getAmount(rental) {
-	let movie = movieFor(rental);
+	let movie = rental.movie;
 	let amount = 0;
 	// determine amount for each movie
 	switch (movie.code) {
@@ -33,7 +28,7 @@ function getAmount(rental) {
 }
 
 function getFrequentRenterPoints(rental) {
-	return (movieFor(rental).code === "new" && rental.days > 2) ? 2 : 1;
+	return (rental.movie.code === "new" && rental.days > 2) ? 2 : 1;
 }
 
 function getTotalFrequentRenterPoints(customer) {
@@ -64,7 +59,7 @@ function txtStatement(customerArg, movies) {
 	function buildBody() {
 		let statement = '';
 		for (let rental of customer.rentals) {
-			statement += `\t${movieFor(rental).title}\t${getAmount(rental)}\n`;
+			statement += `\t${rental.movie.title}\t${getAmount(rental)}\n`;
 		}
 
 		return statement;
@@ -88,7 +83,7 @@ function htmlStatement(customerArg, movies) {
 
 	const amount = () => getTotalAmount(customer);
 	const frequentRenterPoints = () => getTotalFrequentRenterPoints(customer);
-	const movie = (aRental) => movieFor(aRental);
+	const movie = (aRental) => aRental.movie;
 	const rentalAmount = (aRental) => getAmount(aRental);
 
 	let result = `<h1>Rental Record for <em>${customer.name}</em></h1>\n`;
